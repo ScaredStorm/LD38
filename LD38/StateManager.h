@@ -29,6 +29,12 @@ namespace State
 			m_states.top()->initialize();
 		}
 
+		template<typename T, typename... Args> void change(O* game, Args&&... args)
+		{
+			pop();
+			push<T>(game, std::forward(args)...);
+		}
+
 		void handleEvents(sf::Event& event)
 		{
 			m_states.top()->handleEvents(event);

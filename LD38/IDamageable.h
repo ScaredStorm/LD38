@@ -10,12 +10,12 @@ public:
 	virtual void heal(T amount)
 	{
 		// no clamp function in c++14
-		m_health = std::max(std::min((m_health - amount), m_maxHealth), 0);
+		m_health = std::max(std::min((m_health + amount), m_maxHealth), 0);
 	}
 
 	virtual void takeDamage(T amount)
 	{
-
+		m_health = std::max(std::min((m_health - amount), m_maxHealth), 0);
 	}
 
 protected:

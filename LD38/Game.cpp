@@ -8,6 +8,7 @@ namespace Core
 		, m_height(height)
 		, m_window(std::make_unique<sf::RenderWindow>(sf::VideoMode(width, height), title, sf::Style::Default))
 	{
+		m_window.get()->setFramerateLimit(60);
 		m_stateManager.push<State::SMenu>(this);
 	}
 

@@ -1,6 +1,7 @@
 #include "SMenu.h"
 #include <iostream>
 #include <cmath>
+#include "SPlaying.h"
 
 namespace State {
 
@@ -48,6 +49,10 @@ namespace State {
 
 	void SMenu::handleEvents(sf::Event& event)
 	{
+		if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Key::Space)
+		{
+			game->stateManager().change<SPlaying>(game);
+		}
 	}
 
 	void SMenu::update(float delta)
@@ -56,7 +61,6 @@ namespace State {
 		m_timer += delta;
 		float offset = sinf(m_timer) * m_moveAmount;
 		m_start.setPosition(sf::Vector2f{ game->width() / 2.0f, (game->height() - 150.0f) + offset });
-		std::cout << delta << " " << m_timer << std::endl;
 	}
 
 	void SMenu::render(sf::RenderWindow& window)

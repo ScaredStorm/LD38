@@ -6,10 +6,13 @@
 #include <vector>
 
 #include "Entity.h"
+#include "Player.h"
 #include "Game.h"
+#include "Planet.h"
 
 namespace Level
 {
+
 	class Level
 	{
 	public:
@@ -24,10 +27,13 @@ namespace Level
 		void render(sf::RenderWindow& window);
 
 		Entity* getEntity(size_t id);
+		Player* getPlayer();
 
 	private:
 		Core::Game* game; // only for the resource manager and the statemanager
 		std::vector<std::unique_ptr<Entity>> m_entities;
+		std::unique_ptr<Player> m_player;
+		Planet m_planet;
 	};
 }
 
