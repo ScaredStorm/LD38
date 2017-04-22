@@ -18,16 +18,16 @@ namespace Core
 		ResourceController& operator= (ResourceController&& rc) = delete;
 		~ResourceController() {}
 
-		const ResourceType& add(std::string&& name)
+		ResourceType& add(const std::string& name)
 		{
 			std::string path = m_path + name + m_extension;
 			ResourceType r;
 			r.loadFromFile(path);
 			m_res.insert(std::make_pair(name, r));
-			return r;
+			return m_res.at(name);
 		}
 
-		void remove(std::string&& name)
+		void remove(const std::string& name)
 		{
 			if (m_res.find(name) != m_res.end())
 			{
@@ -35,16 +35,16 @@ namespace Core
 			}
 		}
 
-		const ResourceType& get(std::string&& name) const
+		ResourceType& get(const std::string& name)
 		{
 			if (m_res.find(name) != m_res.end())
 			{
-				return m_res[name];
+				return m_res.at(name);
 			}
 			return add(name);
 		}
 
-		const ResourceType& operator[] (std::string&& name) const
+		ResourceType& operator[] (const std::string& name)
 		{
 			return get(name);
 		}
@@ -52,7 +52,7 @@ namespace Core
 	private:
 		std::string m_path;
 		std::string m_extension;
-		std::map<std::string, T> m_res;
+		std::map<std::string, ResourceType> m_res;
 	};
 }
 

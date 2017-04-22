@@ -16,6 +16,7 @@ namespace State
 	class IState
 	{
 	public:
+		virtual void initialize() = 0;
 		virtual void handleEvents(sf::Event& event) = 0;
 		virtual void update(float delta) = 0;
 		virtual void render(sf::RenderWindow& window) = 0;

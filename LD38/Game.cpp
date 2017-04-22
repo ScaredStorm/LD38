@@ -1,5 +1,5 @@
 #include "Game.h"
-#include "SPlaying.h"
+#include "SMenu.h"
 
 namespace Core
 {
@@ -8,7 +8,7 @@ namespace Core
 		, m_height(height)
 		, m_window(std::make_unique<sf::RenderWindow>(sf::VideoMode(width, height), title, sf::Style::Default))
 	{
-		m_stateManager.push<State::SPlaying>(this);
+		m_stateManager.push<State::SMenu>(this);
 	}
 
 	Game::~Game()
@@ -65,5 +65,15 @@ namespace Core
 	ResourceManager& Game::resourceManager()
 	{
 		return m_resourceManager;
+	}
+
+	unsigned int Game::width() const
+	{
+		return m_width;
+	}
+
+	unsigned int Game::height() const
+	{
+		return m_height;
 	}
 }

@@ -2,12 +2,8 @@
 #define SPLAYING_H
 
 #include <SFML/Graphics.hpp>
+#include "Game.h"
 #include "IState.h"
-
-namespace Core
-{
-	class Game;
-}
 
 namespace State
 {
@@ -17,9 +13,13 @@ namespace State
 		SPlaying(Core::Game* game);
 		~SPlaying();
 
+		void initialize() override;
 		void handleEvents(sf::Event& event) override;
 		void update(float delta) override;
 		void render(sf::RenderWindow& window) override;
+
+	private:
+		sf::Sprite background;
 	};
 }
 

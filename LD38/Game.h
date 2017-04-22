@@ -28,6 +28,9 @@ namespace Core
 		State::StateManager<Game>& stateManager();
 		ResourceManager& resourceManager();
 
+		unsigned int width() const;
+		unsigned int height() const;
+
 	private:
 		unsigned int m_width;
 		unsigned int m_height;

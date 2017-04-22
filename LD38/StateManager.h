@@ -26,6 +26,7 @@ namespace State
 		template<typename T, typename... Args> void push(O* game, Args&&... args)
 		{
 			m_states.push(std::make_unique<T>(game, std::forward<Args>(args)...));
+			m_states.top()->initialize();
 		}
 
 		void handleEvents(sf::Event& event)
