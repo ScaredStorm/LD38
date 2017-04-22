@@ -122,7 +122,20 @@
     </Link>
   </ItemDefinitionGroup>
   <ItemGroup>
+    <ClCompile Include="Game.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="ResourceManager.cpp" />
+    <ClCompile Include="SMenu.cpp" />
+    <ClCompile Include="SPlaying.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="Game.h" />
+    <ClInclude Include="IState.h" />
+    <ClInclude Include="ResourceController.h" />
+    <ClInclude Include="ResourceManager.h" />
+    <ClInclude Include="SMenu.h" />
+    <ClInclude Include="SPlaying.h" />
+    <ClInclude Include="StateManager.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
