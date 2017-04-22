@@ -25,6 +25,21 @@
     <Filter Include="Source Files\Resources">
       <UniqueIdentifier>{3f5a88e2-9d3e-497d-bdc5-b24814eceb36}</UniqueIdentifier>
     </Filter>
+    <Filter Include="Source Files\Entity">
+      <UniqueIdentifier>{4203879d-9b4d-4898-9d2e-a224536f3c75}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Entity">
+      <UniqueIdentifier>{c4a6253c-5576-4bd5-b465-bb20158c3b28}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Source Files\Level">
+      <UniqueIdentifier>{f75522f5-9ffd-43a1-b22c-e8eb82c007bb}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Level">
+      <UniqueIdentifier>{7fddf038-2680-442a-b4dc-0b54d25ded2c}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="Header Files\Entity\Interfaces">
+      <UniqueIdentifier>{b691747b-081f-40ce-81d5-ccea0f0c819c}</UniqueIdentifier>
+    </Filter>
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="main.cpp">
@@ -41,6 +56,12 @@
     </ClCompile>
     <ClCompile Include="ResourceManager.cpp">
       <Filter>Source Files\Resources</Filter>
+    </ClCompile>
+    <ClCompile Include="Entity.cpp">
+      <Filter>Source Files\Entity</Filter>
+    </ClCompile>
+    <ClCompile Include="Level.cpp">
+      <Filter>Source Files\Level</Filter>
     </ClCompile>
   </ItemGroup>
   <ItemGroup>
@@ -64,6 +85,15 @@
     </ClInclude>
     <ClInclude Include="ResourceController.h">
       <Filter>Header Files\Resources</Filter>
+    </ClInclude>
+    <ClInclude Include="Entity.h">
+      <Filter>Header Files\Entity</Filter>
+    </ClInclude>
+    <ClInclude Include="Level.h">
+      <Filter>Header Files\Level</Filter>
+    </ClInclude>
+    <ClInclude Include="IDamageable.h">
+      <Filter>Header Files\Entity\Interfaces</Filter>
     </ClInclude>
   </ItemGroup>
 </Project>
