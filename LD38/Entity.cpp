@@ -1,7 +1,11 @@
 #include "Entity.h"
 
-Entity::Entity()
+Entity::Entity(const sf::Texture& texture)
 {
+	this->m_sprite.setTexture(texture);
 }
 
-Entity::~Entity(){}
+void Entity::draw(sf::RenderTarget& target, sf::RenderStates states)
+{
+	target.draw(m_sprite, states);
+}

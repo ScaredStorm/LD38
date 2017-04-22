@@ -128,9 +128,11 @@
     <ClCompile Include="Game.cpp" />
     <ClCompile Include="Level.cpp" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="Player.cpp" />
     <ClCompile Include="ResourceManager.cpp" />
     <ClCompile Include="SMenu.cpp" />
     <ClCompile Include="SPlaying.cpp" />
+    <ClCompile Include="UserInterface.cpp" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="Entity.h" />
@@ -138,11 +140,14 @@
     <ClInclude Include="IDamageable.h" />
     <ClInclude Include="IState.h" />
     <ClInclude Include="Level.h" />
+    <ClInclude Include="Player.h" />
+    <ClInclude Include="Random.h" />
     <ClInclude Include="ResourceController.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="SMenu.h" />
     <ClInclude Include="SPlaying.h" />
     <ClInclude Include="StateManager.h" />
+    <ClInclude Include="UserInterface.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

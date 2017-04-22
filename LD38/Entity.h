@@ -6,15 +6,15 @@
 class Entity : public sf::Drawable
 {
 public:
-	Entity();
-	~Entity();
+	Entity(const sf::Texture& texture);
 
-	virtual void update(float delta) = 0;
 	virtual void handleEvents(sf::Event& event) = 0;
+	virtual void update(float delta) = 0;
+	virtual void draw(sf::RenderTarget& target, sf::RenderStates states);
 
-private:
+protected:
 	sf::Sprite m_sprite;
-
+	sf::Vector2f m_position;
 };
 
 #endif /* ENTITY_H */

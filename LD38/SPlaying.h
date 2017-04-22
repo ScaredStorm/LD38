@@ -4,6 +4,7 @@
 #include <SFML/Graphics.hpp>
 #include "Game.h"
 #include "IState.h"
+#include "Level.h"
 
 namespace State
 {
@@ -20,6 +21,7 @@ namespace State
 
 	private:
 		sf::Sprite background;
+		Level::Level m_level;
 	};
 }
 
