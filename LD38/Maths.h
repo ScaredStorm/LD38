@@ -15,4 +15,10 @@ T to_degrees(T radians)
 	return radians * 180 / PI;
 }
 
+template<typename T>
+T sign(T val)
+{
+	return (T(0) < val) - (val < T(0));
+}
+
 #endif /* MATHS_H */

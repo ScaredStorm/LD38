@@ -62,13 +62,13 @@ namespace Level
 	void Level::render(sf::RenderWindow& window)
 	{
 		m_planet.render(window);
+		if (m_house != nullptr) m_house->render(window);
+
 		for (const auto& e : m_entities)
 		{
 			e.get()->render(window);
 		}
 
-		// render default objects
-		if (m_house != nullptr) m_house->render(window);
 		if (m_player != nullptr) m_player.get()->render(window);
 
 		// render ui

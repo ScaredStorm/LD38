@@ -10,7 +10,7 @@ Entity::Entity(Level::Level* level, const sf::Texture& texture)
 
 void Entity::setTheta(const float & t)
 {
-	theta = t;
+	theta = (t > 360) ? t - 360 : t;
 }
 
 float& Entity::getTheta()

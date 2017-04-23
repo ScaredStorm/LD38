@@ -12,7 +12,7 @@ Alien::Alien(Level::Level * level, const sf::Texture & texture)
 	m_gravitySpeed = 40.0f;
 	m_grounded = false;
 
-	theta = -180;
+	theta = 180;
 	height = 80;
 }
 
@@ -53,8 +53,12 @@ void Alien::updateAI(float delta)
 	House* house = m_level->getHouse();
 	if (house != nullptr)
 	{
-		float destination = house->getTheta();
-		std::cout << destination << " " << getTheta() << std::endl;
+		float direction = sign(house->getTheta() - theta);
+		float distance = abs(house->getTheta() - theta);
+		if (distance > 5.0f)
+		{
+			theta += direction * m_movementSpeed * delta;
+		}
 	}
 }
 
