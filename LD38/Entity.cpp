@@ -1,7 +1,8 @@
 #include "Entity.h"
 #include "Level.h"
 
-Entity::Entity(Level::Level* level, const sf::Texture& texture)
+Entity::Entity(Level::Level* level, const sf::Texture& texture, const std::string& name)
+	: m_name(name)
 {
 	this->m_level = level;
 	m_sprite.setTexture(texture);
@@ -33,6 +34,20 @@ void Entity::setPosition(const sf::Vector2f& position)
 bool Entity::isAlive() const
 {
 	return alive;
+}
+
+sf::FloatRect& Entity::getBbox()
+{
+	return m_sprite.getGlobalBounds();
+}
+
+void Entity::handleCollision(Entity* o)
+{
+}
+
+std::string & Entity::getName()
+{
+	return m_name;
 }
 
 float Entity::getDirectionToPlanet()

@@ -19,6 +19,7 @@ public:
 	void handleEvents(sf::Event& event) override;
 	void update(float delta) override;
 	void render(sf::RenderWindow& window) override;
+	void handleCollision(Entity* o) override;
 
 private:
 	void handleGravity(float delta);

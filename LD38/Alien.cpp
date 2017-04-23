@@ -2,7 +2,7 @@
 #include "Level.h"
 
 Alien::Alien(Level::Level * level, const sf::Texture & texture)
-	: Entity(level, texture)
+	: Entity(level, texture, "alien")
 {
 	m_maxHealth = 30;
 	m_health = 30;
@@ -32,6 +32,8 @@ void Alien::update(float delta)
 	handleGravity(delta);
 	updateAI(delta);
 
+	if (m_health <= 0) alive = false;
+
 	/* calculate new positions */
 	float newX = m_level->getPlanet()->getPosition().x + cosf(to_radians(theta)) * (m_level->getPlanet()->getRadius() + height);
 	float newY = m_level->getPlanet()->getPosition().y + sinf(to_radians(theta)) * (m_level->getPlanet()->getRadius() + height);
@@ -42,6 +44,19 @@ void Alien::update(float delta)
 void Alien::render(sf::RenderWindow & window)
 {
 	window.draw(m_sprite);
+}
+
+void Alien::handleCollision(Entity* o)
+{
+	/*
+	Because there's only one object colliding with this class (Bullet) I'm going to cast the entity to a bullet.
+	I made everything extremely complex for no such reason...
+	*/
+	if (o->getName() == "bullet")
+	{
+		Bullet* b = dynamic_cast<Bullet*>(o);
+		takeDamage(b->getDamageAmount());
+	}
 }
 
 void Alien::handleGravity(float delta)

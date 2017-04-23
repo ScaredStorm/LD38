@@ -3,7 +3,7 @@
 #include <cmath>
 
 House::House(Level::Level* level, const sf::Texture& texture)
-	: Entity(level, texture)
+	: Entity(level, texture, "house")
 {
 	m_maxHealth = 100;
 	m_health = m_maxHealth;

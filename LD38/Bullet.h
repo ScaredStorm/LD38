@@ -12,12 +12,16 @@ public:
 	void update(float delta) override;
 	void render(sf::RenderWindow& window) override;
 
+	void handleCollision(Entity* o) override;
+
+	int getDamageAmount();
+
 private:
 	void rotate();
 
 private:
 	int m_direction;
-	float m_damage;
+	int m_damage;
 	float m_movementSpeed;
 	float height;
 

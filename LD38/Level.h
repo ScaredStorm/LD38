@@ -40,6 +40,7 @@ namespace Level
 
 	private:
 		void removeDeadObjects();
+		void handleCollision();
 
 	private:
 		void controlGame(float delta);

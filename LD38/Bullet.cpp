@@ -3,7 +3,7 @@
 #include "Maths.h"
 
 Bullet::Bullet(Level::Level* level, const sf::Texture& texture, const int& direction)
-	: Entity(level, texture)
+	: Entity(level, texture, "bullet")
 {
 	m_direction = direction;
 	m_damage = 20.0f;
@@ -45,6 +45,16 @@ void Bullet::update(float delta)
 void Bullet::render(sf::RenderWindow& window)
 {
 	window.draw(m_sprite);
+}
+
+void Bullet::handleCollision(Entity * o)
+{
+	alive = false;
+}
+
+int Bullet::getDamageAmount()
+{
+	return m_damage;
 }
 
 void Bullet::rotate()

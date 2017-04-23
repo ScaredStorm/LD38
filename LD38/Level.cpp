@@ -142,6 +142,21 @@ namespace Level
 		}), std::end(m_entities));
 	}
 
+	void Level::handleCollision()
+	{
+		for (auto it = std::begin(m_bullets); it != std::end(m_bullets); ++it)
+		{
+			for (auto et = std::begin(m_entities); et != std::end(m_entities); ++et)
+			{
+				if ((*it)->getBbox().intersects((*et)->getBbox()))
+				{
+					(*it)->handleCollision((*et).get());
+					(*et)->handleCollision((*it).get());
+				}
+			}
+		}
+	}
+
 	void Level::controlGame(float delta)
 	{
 		if (m_currentWave > 0)
