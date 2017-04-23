@@ -1,7 +1,6 @@
 #include "SMenu.h"
-#include <iostream>
-#include <cmath>
 #include "SPlaying.h"
+#include <cmath>
 
 namespace State {
 

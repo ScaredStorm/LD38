@@ -1,5 +1,4 @@
 #include "SPlaying.h"
-#include <iostream>
 
 namespace State
 {

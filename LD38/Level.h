@@ -13,6 +13,7 @@
 #include "House.h"
 #include "Bullet.h"
 #include "UserInterface.h"
+#include "Random.h"
 
 namespace Level
 {
@@ -43,6 +44,9 @@ namespace Level
 		void handleCollision();
 
 	private:
+		void gameController(float delta);
+
+	private:
 		Core::Game* game; // only for the resource manager and the statemanager
 		UI::UserInterface m_ui;
 
@@ -51,6 +55,13 @@ namespace Level
 		std::unique_ptr<Player> m_player;
 		std::unique_ptr<House> m_house;
 		Planet m_planet;
+
+		int m_currentWave;
+		float m_waitAmount;
+		float m_waitTimer;
+		bool m_pushedMessage;
+
+		Random<std::minstd_rand> r;
 	};
 }
 

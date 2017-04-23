@@ -1,7 +1,6 @@
 #include "Level.h"
 #include <iterator>
 #include <cmath>
-#include <iostream>
 
 namespace Level
 {
@@ -14,7 +13,10 @@ namespace Level
 		m_planet.setPosition({ game->width() / 2.0f, game->height() / 2.0f });
 		m_ui.player = m_player.get();
 
-		m_entities.push_back(std::make_unique<Alien>(this, game->resourceManager().textures["alien"]));
+		m_currentWave = 0;
+		m_waitAmount = 3.0f;
+		m_waitTimer = 0.0f;
+		m_pushedMessage = false;
 	}
 
 	void Level::handleEvents(sf::Event& event)
@@ -41,6 +43,8 @@ namespace Level
 			(*it)->update(delta);
 		}
 		if (m_player != nullptr) m_player.get()->update(delta);
+
+		gameController(delta);
 
 		// update ui
 		m_ui.update(delta);
@@ -105,7 +109,7 @@ namespace Level
 
 	void Level::createBullet(const int& direction, const float& theta)
 	{
-		std::unique_ptr<Bullet> b = std::make_unique<Bullet>(this, game->resourceManager().textures["bullet"], direction);
+		auto b = std::make_unique<Bullet>(this, game->resourceManager().textures["bullet"], direction);
 		b->setTheta(theta);
 		m_bullets.push_back(std::move(b));
 	}
@@ -130,11 +134,48 @@ namespace Level
 				// the shittiest collision detection ever, this is not the nicest collision detection ever... but time
 				sf::Vector2f nv = (*it)->getPosition() - (*et)->getPosition();
 				float d = sqrtf(nv.x*nv.x + nv.y*nv.y);
-				std::cout << d << std::endl;
 				if (d < 20.0f)
 				{
 					(*it)->handleCollision((*et).get());
 					(*et)->handleCollision((*it).get());
+				}
+			}
+		}
+	}
+
+	/* THE SUPER BASIC GAME CONTROLLER */
+	void Level::gameController(float delta)
+	{
+		if (m_house != nullptr)
+		{
+			// check if there aren't aliens left on the planet
+			if (m_entities.size() == 0)
+			{
+				// add a timer so that I can display a message in the ui
+				if (m_waitTimer < m_waitAmount)
+				{
+					m_waitTimer += delta;
+					if (!m_pushedMessage)
+					{
+						m_pushedMessage = true;
+						m_ui.setMessage("aliens incoming", 3.0f);
+					}
+				}
+				else
+				{
+					// reset the timer
+					m_waitTimer = 0.0f;
+					m_pushedMessage = false;
+
+					// spawn aliens
+					m_currentWave++;
+					int maxEnemies = m_currentWave*m_currentWave;
+					for (int i = 0; i < maxEnemies; i++)
+					{
+						auto enemy = std::make_unique<Alien>(this, game->resourceManager().textures["alien"]);
+						enemy->setTheta(r.range(0, 360));
+						m_entities.push_back(std::move(enemy));
+					}
 				}
 			}
 		}
