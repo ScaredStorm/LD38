@@ -1,6 +1,5 @@
 #include "Alien.h"
 #include "Level.h"
-#include <iostream>
 
 Alien::Alien(Level::Level * level, const sf::Texture & texture)
 	: Entity(level, texture)
@@ -11,6 +10,10 @@ Alien::Alien(Level::Level * level, const sf::Texture & texture)
 	m_movementSpeed = 25.0f;
 	m_gravitySpeed = 40.0f;
 	m_grounded = false;
+
+	m_maxDamage = 10;
+	m_damageStepSize = 5.0f; // 5 seconds
+	m_damageTimer = 0.0f;
 
 	theta = 180;
 	height = 80;
@@ -59,6 +62,25 @@ void Alien::updateAI(float delta)
 		{
 			theta += direction * m_movementSpeed * delta;
 		}
+		else
+		{
+			dealDamage(delta);
+		}
+	}
+}
+
+void Alien::dealDamage(float delta)
+{
+	// This function can only be called when the alien is in range
+	// So I don't have to check if the house is null.
+	if (m_damageTimer < m_damageStepSize)
+	{
+		m_damageTimer += delta;
+	}
+	else
+	{
+		m_level->getHouse()->takeDamage(m_maxDamage);
+		m_damageTimer = 0.0f;
 	}
 }
 

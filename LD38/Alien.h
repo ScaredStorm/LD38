@@ -23,11 +23,17 @@ public:
 private:
 	void handleGravity(float delta);
 	void updateAI(float delta);
+	void dealDamage(float delta);
 	void rotate();
 
 private:
 	float m_movementSpeed;
 	float m_gravitySpeed;
+	
+	float m_maxDamage;
+	float m_damageTimer;
+	float m_damageStepSize;
+
 	bool m_grounded;
 	float height;
 	float velocity;

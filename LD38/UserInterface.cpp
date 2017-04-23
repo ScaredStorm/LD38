@@ -2,6 +2,7 @@
 #include "Game.h"
 #include "Player.h"
 #include "House.h"
+#include <iostream>
 
 namespace UI
 {
@@ -20,7 +21,7 @@ namespace UI
 		m_houseHealth.setFont(m_mainFont);
 		m_houseHealth.setFillColor(sf::Color::White);
 		m_houseHealth.setCharacterSize(30);
-		m_houseHealth.setPosition(20, 60);
+		m_houseHealth.setPosition(20, 20); // 20, 60
 		m_houseHealth.setString("HOUSE: ");
 
 		m_message.setFont(m_mainFont);
@@ -64,10 +65,11 @@ namespace UI
 
 	void UserInterface::render(sf::RenderWindow& window)
 	{
-		if (player != nullptr)
+		/* RE-ADD WHEN MORE TIME */
+		/*if (player != nullptr)
 		{
 			window.draw(m_playerHealth);
-		}
+		}*/
 
 		if (house != nullptr)
 		{
@@ -98,6 +100,6 @@ namespace UI
 
 	int UserInterface::calculatePercentage(int amount, int maxAmount)
 	{
-		return (amount / maxAmount) * 100;
+		return 100 * amount / maxAmount;
 	}
 }
