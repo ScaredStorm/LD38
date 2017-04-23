@@ -9,6 +9,7 @@
 #include "Player.h"
 #include "Game.h"
 #include "Planet.h"
+#include "UserInterface.h"
 
 namespace Level
 {
@@ -32,6 +33,8 @@ namespace Level
 
 	private:
 		Core::Game* game; // only for the resource manager and the statemanager
+		UI::UserInterface m_ui;
+
 		std::vector<std::unique_ptr<Entity>> m_entities;
 		std::unique_ptr<Player> m_player;
 		Planet m_planet;

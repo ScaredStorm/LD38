@@ -1,7 +1,7 @@
 #ifndef MATHS_H
 #define MATHS_H
 
-float PI = 3.14159265359f;
+extern float PI;
 
 template<typename T>
 T to_radians(T degrees)
@@ -15,4 +15,4 @@ T to_degrees(T radians)
 	return radians * 180 / PI;
 }
 
-#endif /* GLOBALS_H */
+#endif /* MATHS_H */

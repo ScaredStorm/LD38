@@ -1,9 +1,22 @@
 #include "Entity.h"
 #include "Level.h"
 
-Entity::Entity(Level::Level* level)
+Entity::Entity(Level::Level* level, const sf::Texture& texture)
 {
 	this->m_level = level;
+	m_sprite.setTexture(texture);
+	m_sprite.setOrigin(sf::Vector2f{ m_sprite.getGlobalBounds().width / 2, m_sprite.getGlobalBounds().height - 6 });
+}
+
+const sf::Vector2f& Entity::getPosition()
+{
+	return m_position;
+}
+
+void Entity::setPosition(const sf::Vector2f& position)
+{
+	m_position = position;
+	m_sprite.setPosition(position);
 }
 
 float Entity::getDirectionToPlanet()

@@ -11,7 +11,7 @@ namespace Level
 	class Level;
 }
 
-class Player : public Entity, public IDamageable<int>
+class Player : public Entity, public IDamageable<>
 {
 public:
 	Player(Level::Level* level, const sf::Texture& texture);
@@ -20,9 +20,6 @@ public:
 	void handleEvents(sf::Event& event) override;
 	void update(float delta) override;
 	void render(sf::RenderWindow& window) override;
-
-	const sf::Vector2f& getPosition() override;
-	void setPosition(const sf::Vector2f& position) override;
 
 private:
 	void handleInput(float delta);

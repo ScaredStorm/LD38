@@ -2,7 +2,7 @@
 #define ENTITY_H
 
 #include <SFML/Graphics.hpp>
-#include <cmath>
+#include "Maths.h"
 
 namespace Level
 {
@@ -12,13 +12,14 @@ namespace Level
 class Entity
 {
 public:
-	Entity(Level::Level* level);
+	Entity(Level::Level* level, const sf::Texture& texture);
 
 	virtual void handleEvents(sf::Event& event) = 0;
 	virtual void update(float delta) = 0;
 	virtual void render(sf::RenderWindow& window) = 0;
-	virtual const sf::Vector2f& getPosition() = 0;
-	virtual void setPosition(const sf::Vector2f& position) = 0;
+
+	virtual const sf::Vector2f& getPosition();
+	virtual void setPosition(const sf::Vector2f& position);
 
 protected:
 	virtual float getDirectionToPlanet();

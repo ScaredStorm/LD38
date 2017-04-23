@@ -5,11 +5,14 @@ namespace Level
 {
 	Level::Level(Core::Game* game)
 		: m_planet(game->resourceManager().textures["planet"])
+		, m_ui(game)
 	{
 		this->game = game;
 		m_player = std::make_unique<Player>(this, game->resourceManager().textures["player"]);
 
-		m_planet.setPosition(sf::Vector2f{ game->width() / 2.0f, game->height() / 2.0f });
+		m_planet.setPosition({ game->width() / 2.0f, game->height() / 2.0f });
+
+		m_ui.player = m_player.get();
 	}
 
 	void Level::handleEvents(sf::Event& event)
@@ -23,6 +26,9 @@ namespace Level
 			(*it)->update(delta);
 		}
 		m_player.get()->update(delta);
+
+		// update ui
+		m_ui.update(delta);
 	}
 
 	void Level::render(sf::RenderWindow& window)
@@ -33,6 +39,9 @@ namespace Level
 			e.get()->render(window);
 		}
 		m_player.get()->render(window);
+
+		// render ui
+		m_ui.render(window);
 	}
 
 	Entity* Level::getEntity(size_t id)

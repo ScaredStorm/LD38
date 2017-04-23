@@ -1,14 +1,10 @@
 #include "Player.h"
 #include "Level.h"
 #include <cmath>
-#include <iostream>
-#include "Maths.h"
 
 Player::Player(Level::Level* level, const sf::Texture& texture)
-	: Entity(level)
+	: Entity(level, texture)
 {
-	m_sprite.setTexture(texture);
-	m_sprite.setOrigin(sf::Vector2f{ m_sprite.getGlobalBounds().width / 2, m_sprite.getGlobalBounds().height - 6 });
 	m_maxHealth = 100;
 	m_health = m_maxHealth;
 	m_movementSpeed = 25.0f;
@@ -44,17 +40,6 @@ void Player::update(float delta)
 void Player::render(sf::RenderWindow& window)
 {
 	window.draw(m_sprite);
-}
-
-const sf::Vector2f& Player::getPosition()
-{
-	return m_position;
-}
-
-void Player::setPosition(const sf::Vector2f& position)
-{
-	m_position = position;
-	m_sprite.setPosition(position);
 }
 
 void Player::handleInput(float delta)
