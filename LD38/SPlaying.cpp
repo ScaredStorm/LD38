@@ -20,6 +20,13 @@ namespace State
 	void SPlaying::handleEvents(sf::Event& event)
 	{
 		m_level.handleEvents(event);
+		if (event.type == sf::Event::KeyPressed && event.key.code == sf::Keyboard::Key::Space)
+		{
+			if (m_level.isGameOver())
+			{
+				game->stateManager().change<SPlaying>(game);
+			}
+		}
 	}
 	
 	void SPlaying::update(float delta)

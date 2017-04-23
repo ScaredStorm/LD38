@@ -126,6 +126,11 @@ namespace Level
 		m_ui.setScore(m_score);
 	}
 
+	bool Level::isGameOver() const
+	{
+		return m_gameOver;
+	}
+
 	void Level::removeDeadObjects()
 	{
 		m_bullets.erase(std::remove_if(std::begin(m_bullets), std::end(m_bullets), [](const std::unique_ptr<Bullet>& o) {

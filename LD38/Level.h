@@ -40,6 +40,7 @@ namespace Level
 		void createBullet(const int& direction, const float& theta);
 
 		void increaseScore(int amount);
+		bool isGameOver() const;
 		
 	private:
 		void removeDeadObjects();
