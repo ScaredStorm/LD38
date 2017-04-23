@@ -29,6 +29,12 @@ private:
 	void rotate();
 
 private:
+	void shoot(float delta, int direction);
+
+	float m_shootTimer;
+	float m_shootWait;
+
+private:
 	float m_movementSpeed;
 	float m_jumpHeight;
 	float m_gravitySpeed;

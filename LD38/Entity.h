@@ -22,6 +22,7 @@ public:
 	virtual float& getTheta();
 	virtual const sf::Vector2f& getPosition();
 	virtual void setPosition(const sf::Vector2f& position);
+	virtual bool isAlive() const;
 
 protected:
 	virtual float getDirectionToPlanet();
@@ -32,7 +33,7 @@ protected:
 	sf::Sprite m_sprite;
 	sf::Vector2f m_position;
 	float theta;
-
+	bool alive;
 };
 
 #endif /* ENTITY_H */

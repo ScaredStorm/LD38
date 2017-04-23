@@ -33,6 +33,13 @@ namespace Level
 
 	void Level::update(float delta)
 	{
+		// update bullets
+		for (auto it = std::begin(m_bullets); it != std::end(m_bullets); ++it)
+		{
+			(*it)->update(delta);
+		}
+
+		// update entities
 		for (auto it = std::begin(m_entities); it != std::end(m_entities); ++it)
 		{
 			(*it)->update(delta);
@@ -57,6 +64,8 @@ namespace Level
 
 		// update ui
 		m_ui.update(delta);
+
+		removeDeadObjects();
 	}
 
 	void Level::render(sf::RenderWindow& window)
@@ -64,6 +73,13 @@ namespace Level
 		m_planet.render(window);
 		if (m_house != nullptr) m_house->render(window);
 
+		// render bullets
+		for (const auto& e : m_bullets)
+		{
+			e.get()->render(window);
+		}
+
+		// render entities
 		for (const auto& e : m_entities)
 		{
 			e.get()->render(window);
@@ -106,6 +122,24 @@ namespace Level
 		// pass the house to the ui
 		m_ui.house = m_house.get();
 		m_currentWave++;
+	}
+
+	void Level::createBullet(const int& direction, const float& theta)
+	{
+		std::unique_ptr<Bullet> b = std::make_unique<Bullet>(this, game->resourceManager().textures["bullet"], direction);
+		b->setTheta(theta);
+		m_bullets.push_back(std::move(b));
+	}
+
+	void Level::removeDeadObjects()
+	{
+		m_bullets.erase(std::remove_if(std::begin(m_bullets), std::end(m_bullets), [](const std::unique_ptr<Bullet>& o) {
+			return !o.get()->isAlive();
+		}), std::end(m_bullets));
+
+		m_entities.erase(std::remove_if(std::begin(m_entities), std::end(m_entities), [](const std::unique_ptr<Entity>& o) {
+			return !o.get()->isAlive();
+		}), std::end(m_entities));
 	}
 
 	void Level::controlGame(float delta)

@@ -11,6 +11,7 @@
 #include "Game.h"
 #include "Planet.h"
 #include "House.h"
+#include "Bullet.h"
 #include "UserInterface.h"
 
 namespace Level
@@ -35,6 +36,10 @@ namespace Level
 
 		House* getHouse();
 		void createHouse(const float& theta);
+		void createBullet(const int& direction, const float& theta);
+
+	private:
+		void removeDeadObjects();
 
 	private:
 		void controlGame(float delta);
@@ -46,7 +51,8 @@ namespace Level
 		Core::Game* game; // only for the resource manager and the statemanager
 		UI::UserInterface m_ui;
 
-		std::vector<std::unique_ptr<Entity>> m_entities;
+		std::vector<std::unique_ptr<Bullet>> m_bullets; // player bullets
+		std::vector<std::unique_ptr<Entity>> m_entities; // aliens
 		std::unique_ptr<Player> m_player;
 		std::unique_ptr<House> m_house;
 		Planet m_planet;

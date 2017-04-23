@@ -6,6 +6,7 @@ Entity::Entity(Level::Level* level, const sf::Texture& texture)
 	this->m_level = level;
 	m_sprite.setTexture(texture);
 	m_sprite.setOrigin(sf::Vector2f{ m_sprite.getGlobalBounds().width / 2, m_sprite.getGlobalBounds().height - 6 });
+	alive = true;
 }
 
 void Entity::setTheta(const float & t)
@@ -27,6 +28,11 @@ void Entity::setPosition(const sf::Vector2f& position)
 {
 	m_position = position;
 	m_sprite.setPosition(position);
+}
+
+bool Entity::isAlive() const
+{
+	return alive;
 }
 
 float Entity::getDirectionToPlanet()

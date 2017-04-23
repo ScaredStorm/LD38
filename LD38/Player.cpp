@@ -16,6 +16,9 @@ Player::Player(Level::Level* level, const sf::Texture& texture)
 	theta = 270.0f;
 	height = 0.0f;
 	velocity = 0.0f;
+
+	m_shootTimer = 0.5f;
+	m_shootWait = 0.5f;
 }
 
 Player::~Player()
@@ -56,6 +59,16 @@ void Player::render(sf::RenderWindow& window)
 
 void Player::handleInput(float delta)
 {
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Left))
+	{
+		shoot(delta, -1);
+	}
+	
+	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Right))
+	{
+		shoot(delta, 1);
+	}
+
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
 	{
 		theta -= m_movementSpeed * delta;
@@ -91,4 +104,17 @@ void Player::rotate()
 {
 	float angle = getDirectionToPlanet();
 	m_sprite.setRotation(to_degrees(angle) + 90.0f);
+}
+
+void Player::shoot(float delta, int direction)
+{
+	if (m_shootTimer < m_shootWait)
+	{
+		m_shootTimer += delta;
+	}
+	else
+	{
+		m_shootTimer = 0.0f;
+		m_level->createBullet(direction, theta);
+	}
 }
