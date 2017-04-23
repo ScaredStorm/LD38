@@ -9,6 +9,7 @@
 #include "Player.h"
 #include "Game.h"
 #include "Planet.h"
+#include "House.h"
 #include "UserInterface.h"
 
 namespace Level
@@ -31,12 +32,16 @@ namespace Level
 		Player* getPlayer();
 		Planet* getPlanet();
 
+		House* getHouse();
+		void createHouse(const float& theta);
+
 	private:
 		Core::Game* game; // only for the resource manager and the statemanager
 		UI::UserInterface m_ui;
 
 		std::vector<std::unique_ptr<Entity>> m_entities;
 		std::unique_ptr<Player> m_player;
+		std::unique_ptr<House> m_house;
 		Planet m_planet;
 	};
 }

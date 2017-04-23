@@ -49,7 +49,7 @@ namespace UI
 		else
 		{
 			if (!m_messageVisible)
-				setMessage("Press <SPACE> to place your house", 10);
+				setMessage("Press <W> to place your house", 10);
 		}
 
 		// update the message visibility

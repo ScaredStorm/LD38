@@ -1,6 +1,8 @@
 #include "Player.h"
+#include "House.h"
 #include "Level.h"
 #include <cmath>
+#include <memory>
 
 Player::Player(Level::Level* level, const sf::Texture& texture)
 	: Entity(level, texture)
@@ -23,6 +25,14 @@ Player::~Player()
 
 void Player::handleEvents(sf::Event& event)
 {
+	if (event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::Key::W)
+	{
+		// place the house if not exist
+		if (m_level->getHouse() != nullptr)
+		{
+			auto house = std::make_unique<House>()
+		}
+	}
 }
 
 void Player::update(float delta)

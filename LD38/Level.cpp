@@ -25,7 +25,7 @@ namespace Level
 		{
 			(*it)->update(delta);
 		}
-		m_player.get()->update(delta);
+		if (m_player != nullptr) m_player.get()->update(delta);
 
 		// update ui
 		m_ui.update(delta);
@@ -38,7 +38,10 @@ namespace Level
 		{
 			e.get()->render(window);
 		}
-		m_player.get()->render(window);
+
+		// render default objects
+		if (m_house != nullptr) m_house->render(window);
+		if (m_player != nullptr) m_player.get()->render(window);
 
 		// render ui
 		m_ui.render(window);
@@ -59,5 +62,20 @@ namespace Level
 	Planet* Level::getPlanet()
 	{
 		return &m_planet;
+	}
+
+	House* Level::getHouse()
+	{
+		return m_house.get();
+	}
+
+	void Level::createHouse(const float& theta)
+	{
+		m_house = std::make_unique<House>(this, game->resourceManager().textures["house"]);
+		m_house->setTheta(theta);
+		m_house->calculatePosition();
+
+		// pass the house to the ui
+		m_ui.house = m_house.get();
 	}
 }
