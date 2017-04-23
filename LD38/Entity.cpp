@@ -36,11 +36,6 @@ bool Entity::isAlive() const
 	return alive;
 }
 
-sf::FloatRect& Entity::getBbox()
-{
-	return m_sprite.getGlobalBounds();
-}
-
 void Entity::handleCollision(Entity* o)
 {
 }

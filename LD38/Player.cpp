@@ -80,11 +80,11 @@ void Player::handleInput(float delta)
 		m_sprite.setScale(1, 1);
 	}
 
-	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space) && m_grounded)
+	/*if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space) && m_grounded)
 	{
 		velocity = m_jumpHeight;
 		m_grounded = false;
-	}
+	}*/
 }
 
 void Player::handleGravity(float delta)

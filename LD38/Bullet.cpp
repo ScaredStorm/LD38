@@ -49,7 +49,7 @@ void Bullet::render(sf::RenderWindow& window)
 
 void Bullet::handleCollision(Entity * o)
 {
-	//alive = false;
+	alive = false;
 }
 
 int Bullet::getDamageAmount()

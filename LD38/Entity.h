@@ -24,7 +24,6 @@ public:
 	virtual const sf::Vector2f& getPosition();
 	virtual void setPosition(const sf::Vector2f& position);
 	virtual bool isAlive() const;
-	virtual sf::FloatRect& getBbox();
 
 	virtual void handleCollision(Entity* e);
 	virtual std::string& getName();

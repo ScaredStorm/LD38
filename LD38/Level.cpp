@@ -1,5 +1,7 @@
 #include "Level.h"
 #include <iterator>
+#include <cmath>
+#include <iostream>
 
 namespace Level
 {
@@ -13,13 +15,6 @@ namespace Level
 		m_ui.player = m_player.get();
 
 		m_entities.push_back(std::make_unique<Alien>(this, game->resourceManager().textures["alien"]));
-
-		/* wave stuff */
-		m_currentWave = 0;
-		m_waveStarted = false;
-		m_waveFinished = false;
-		m_didFinishSpawning = false;
-		m_waveTimer = 0.0f;
 	}
 
 	void Level::handleEvents(sf::Event& event)
@@ -33,6 +28,7 @@ namespace Level
 
 	void Level::update(float delta)
 	{
+		handleCollision();
 		// update bullets
 		for (auto it = std::begin(m_bullets); it != std::end(m_bullets); ++it)
 		{
@@ -45,8 +41,6 @@ namespace Level
 			(*it)->update(delta);
 		}
 		if (m_player != nullptr) m_player.get()->update(delta);
-
-		handleCollision();
 
 		// update ui
 		m_ui.update(delta);
@@ -107,7 +101,6 @@ namespace Level
 
 		// pass the house to the ui
 		m_ui.house = m_house.get();
-		m_currentWave++;
 	}
 
 	void Level::createBullet(const int& direction, const float& theta)
@@ -134,7 +127,11 @@ namespace Level
 		{
 			for (auto et = std::begin(m_entities); et != std::end(m_entities); ++et)
 			{
-				if ((*it)->getBbox().intersects((*et)->getBbox()))
+				// the shittiest collision detection ever, this is not the nicest collision detection ever... but time
+				sf::Vector2f nv = (*it)->getPosition() - (*et)->getPosition();
+				float d = sqrtf(nv.x*nv.x + nv.y*nv.y);
+				std::cout << d << std::endl;
+				if (d < 20.0f)
 				{
 					(*it)->handleCollision((*et).get());
 					(*et)->handleCollision((*it).get());
