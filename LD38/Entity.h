@@ -18,6 +18,8 @@ public:
 	virtual void update(float delta) = 0;
 	virtual void render(sf::RenderWindow& window) = 0;
 
+	virtual void setTheta(const float& t);
+	virtual float& getTheta();
 	virtual const sf::Vector2f& getPosition();
 	virtual void setPosition(const sf::Vector2f& position);
 
@@ -29,6 +31,7 @@ protected:
 	Level::Level* m_level;
 	sf::Sprite m_sprite;
 	sf::Vector2f m_position;
+	float theta;
 
 };
 

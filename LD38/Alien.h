@@ -1,41 +1,36 @@
-#ifndef PLAYER_H
-#define PLAYER_H
+#ifndef ALIEN_H
+#define ALIEN_H
 
+#include <SFML/Graphics.hpp>
 #include "Entity.h"
 #include "IDamageable.h"
-
-#include "Planet.h"
 
 namespace Level
 {
 	class Level;
 }
 
-class Player : public Entity, public IDamageable<>
+class Alien : public Entity, public IDamageable<int>
 {
 public:
-	Player(Level::Level* level, const sf::Texture& texture);
-	~Player();
+	Alien(Level::Level* level, const sf::Texture& texture);
+	~Alien();
 
 	void handleEvents(sf::Event& event) override;
 	void update(float delta) override;
 	void render(sf::RenderWindow& window) override;
 
 private:
-	void handleInput(float delta);
 	void handleGravity(float delta);
-	
-	float getHeightFromPlanet();
+	void updateAI(float delta);
 	void rotate();
 
 private:
 	float m_movementSpeed;
-	float m_jumpHeight;
 	float m_gravitySpeed;
 	bool m_grounded;
-
-	float height; // height = distance from the planet surface (excluding the radius of the planet)
+	float height;
 	float velocity;
 };
 
-#endif /* PLAYER_H */
+#endif /* ALIEN_H */

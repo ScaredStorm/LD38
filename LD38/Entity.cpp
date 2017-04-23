@@ -8,6 +8,16 @@ Entity::Entity(Level::Level* level, const sf::Texture& texture)
 	m_sprite.setOrigin(sf::Vector2f{ m_sprite.getGlobalBounds().width / 2, m_sprite.getGlobalBounds().height - 6 });
 }
 
+void Entity::setTheta(const float & t)
+{
+	theta = t;
+}
+
+float& Entity::getTheta()
+{
+	return theta;
+}
+
 const sf::Vector2f& Entity::getPosition()
 {
 	return m_position;

@@ -9,14 +9,26 @@ namespace Level
 	{
 		this->game = game;
 		m_player = std::make_unique<Player>(this, game->resourceManager().textures["player"]);
-
 		m_planet.setPosition({ game->width() / 2.0f, game->height() / 2.0f });
-
 		m_ui.player = m_player.get();
+
+		m_entities.push_back(std::make_unique<Alien>(this, game->resourceManager().textures["alien"]));
+
+		/* wave stuff */
+		m_currentWave = 0;
+		m_waveStarted = false;
+		m_waveFinished = false;
+		m_didFinishSpawning = false;
+		m_waveTimer = 0.0f;
 	}
 
 	void Level::handleEvents(sf::Event& event)
 	{
+		for (auto it = std::begin(m_entities); it != std::end(m_entities); ++it)
+		{
+			(*it)->handleEvents(event);
+		}
+		if (m_player != nullptr) m_player.get()->handleEvents(event);
 	}
 
 	void Level::update(float delta)
@@ -26,6 +38,22 @@ namespace Level
 			(*it)->update(delta);
 		}
 		if (m_player != nullptr) m_player.get()->update(delta);
+
+		controlGame(delta);
+
+		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
+		{
+			std::unique_ptr<Alien> a = std::make_unique<Alien>(this, game->resourceManager().textures["alien"]);
+			sf::Vector2i mousePos = sf::Mouse::getPosition(game->window());
+			
+			float dx = mousePos.x - m_planet.getPosition().x;
+			float dy = mousePos.y - m_planet.getPosition().y;
+			float angle = atan2f(dy, dx);
+
+			a->setTheta(to_degrees(angle));
+
+			m_entities.push_back(std::move(a));
+		}
 
 		// update ui
 		m_ui.update(delta);
@@ -77,5 +105,54 @@ namespace Level
 
 		// pass the house to the ui
 		m_ui.house = m_house.get();
+		m_currentWave++;
+	}
+
+	void Level::controlGame(float delta)
+	{
+		if (m_currentWave > 0)
+		{
+			if (!m_waveStarted && m_waveFinished)
+			{
+				m_currentWave++;
+				m_waveTimer = 3.0f;
+				m_waveStarted = true;
+				m_ui.setMessage("wave starts in 3 seconds", 3.0f);
+			}
+			waveStart(delta);
+		}
+	}
+
+	void Level::waveStart(float delta)
+	{
+		if (m_waveStarted)
+		{
+			if (m_waveFinished)
+			{
+				if (m_waveTimer > 0.0f)
+				{
+					m_waveTimer -= delta;
+				}
+				else
+				{
+					// actually started right now
+					m_waveFinished = false;
+					spawnWave();
+				}
+			}
+		}
+	}
+
+	void Level::spawnWave()
+	{
+		int totalEnemies = m_currentWave*m_currentWave;
+	}
+
+	void Level::enemyCheck()
+	{
+		if (m_entities.size() == 0)
+		{
+
+		}
 	}
 }

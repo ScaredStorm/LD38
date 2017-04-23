@@ -18,11 +18,7 @@ public:
 	void handleEvents(sf::Event& event) override;
 	void update(float delta) override;
 	void render(sf::RenderWindow& window) override;
-	void setTheta(const float& t);
 	void calculatePosition();
-
-private:
-	float theta;
 };
 
 #endif /* HOUSE_H */

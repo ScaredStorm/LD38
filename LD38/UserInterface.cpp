@@ -25,7 +25,7 @@ namespace UI
 
 		m_message.setFont(m_mainFont);
 		m_message.setCharacterSize(48);
-		m_message.setPosition(game->width() / 2.0f, game->height() / 2.0f);
+		m_message.setPosition(game->width() / 2.0f, game->height() - 128);
 	}
 
 	UserInterface::~UserInterface()

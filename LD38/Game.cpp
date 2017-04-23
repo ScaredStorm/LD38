@@ -6,9 +6,9 @@ namespace Core
 	Game::Game(std::string&& title, unsigned int width, unsigned int height)
 		: m_width(width)
 		, m_height(height)
-		, m_window(std::make_unique<sf::RenderWindow>(sf::VideoMode(width, height), title, sf::Style::Default))
+		, m_window(sf::VideoMode(width, height), title, sf::Style::Default)
 	{
-		m_window.get()->setFramerateLimit(60);
+		m_window.setFramerateLimit(60);
 		m_stateManager.push<State::SMenu>(this);
 	}
 
@@ -19,10 +19,10 @@ namespace Core
 	void Game::run()
 	{
 		sf::Clock clock;
-		while (m_window->isOpen())
+		while (m_window.isOpen())
 		{
 			sf::Event e;
-			while (m_window->pollEvent(e))
+			while (m_window.pollEvent(e))
 			{
 				handleEvents(e);
 			}
@@ -35,7 +35,7 @@ namespace Core
 
 	void Game::quit()
 	{
-		m_window->close();
+		m_window.close();
 	}
 
 	void Game::handleEvents(sf::Event& event)
@@ -53,9 +53,9 @@ namespace Core
 
 	void Game::render()
 	{
-		m_window->clear();
-		m_stateManager.render(*m_window);
-		m_window->display();
+		m_window.clear();
+		m_stateManager.render(m_window);
+		m_window.display();
 	}
 
 	State::StateManager<Game>& Game::stateManager()
@@ -66,6 +66,11 @@ namespace Core
 	ResourceManager& Game::resourceManager()
 	{
 		return m_resourceManager;
+	}
+
+	sf::RenderWindow& Game::window()
+	{
+		return m_window;
 	}
 
 	unsigned int Game::width() const

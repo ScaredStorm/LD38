@@ -27,6 +27,7 @@ namespace Core
 
 		State::StateManager<Game>& stateManager();
 		ResourceManager& resourceManager();
+		sf::RenderWindow& window();
 
 		unsigned int width() const;
 		unsigned int height() const;
@@ -34,7 +35,7 @@ namespace Core
 	private:
 		unsigned int m_width;
 		unsigned int m_height;
-		std::unique_ptr<sf::RenderWindow> m_window;
+		sf::RenderWindow m_window;
 
 		State::StateManager<Game> m_stateManager;
 		ResourceManager m_resourceManager;

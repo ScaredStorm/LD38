@@ -1,5 +1,4 @@
 #include "Player.h"
-#include "House.h"
 #include "Level.h"
 #include <cmath>
 #include <memory>
@@ -25,12 +24,15 @@ Player::~Player()
 
 void Player::handleEvents(sf::Event& event)
 {
-	if (event.type == sf::Event::KeyReleased && event.key.code == sf::Keyboard::Key::W)
+	if (event.type == sf::Event::KeyPressed)
 	{
-		// place the house if not exist
-		if (m_level->getHouse() != nullptr)
+		if (event.key.code == sf::Keyboard::W)
 		{
-			auto house = std::make_unique<House>()
+			// place the house if not exist
+			if (m_level->getHouse() == nullptr)
+			{
+				m_level->createHouse(theta);
+			}
 		}
 	}
 }
@@ -55,9 +57,15 @@ void Player::render(sf::RenderWindow& window)
 void Player::handleInput(float delta)
 {
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::A))
+	{
 		theta -= m_movementSpeed * delta;
+		m_sprite.setScale(-1, 1);
+	}
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::D))
+	{
 		theta += m_movementSpeed * delta;
+		m_sprite.setScale(1, 1);
+	}
 
 	if (sf::Keyboard::isKeyPressed(sf::Keyboard::Key::Space) && m_grounded)
 	{
