@@ -46,21 +46,7 @@ namespace Level
 		}
 		if (m_player != nullptr) m_player.get()->update(delta);
 
-		controlGame(delta);
-
-		if (sf::Mouse::isButtonPressed(sf::Mouse::Left))
-		{
-			std::unique_ptr<Alien> a = std::make_unique<Alien>(this, game->resourceManager().textures["alien"]);
-			sf::Vector2i mousePos = sf::Mouse::getPosition(game->window());
-			
-			float dx = mousePos.x - m_planet.getPosition().x;
-			float dy = mousePos.y - m_planet.getPosition().y;
-			float angle = atan2f(dy, dx);
-
-			a->setTheta(to_degrees(angle));
-
-			m_entities.push_back(std::move(a));
-		}
+		handleCollision();
 
 		// update ui
 		m_ui.update(delta);
@@ -154,54 +140,6 @@ namespace Level
 					(*et)->handleCollision((*it).get());
 				}
 			}
-		}
-	}
-
-	void Level::controlGame(float delta)
-	{
-		if (m_currentWave > 0)
-		{
-			if (!m_waveStarted && m_waveFinished)
-			{
-				m_currentWave++;
-				m_waveTimer = 3.0f;
-				m_waveStarted = true;
-				m_ui.setMessage("wave starts in 3 seconds", 3.0f);
-			}
-			waveStart(delta);
-		}
-	}
-
-	void Level::waveStart(float delta)
-	{
-		if (m_waveStarted)
-		{
-			if (m_waveFinished)
-			{
-				if (m_waveTimer > 0.0f)
-				{
-					m_waveTimer -= delta;
-				}
-				else
-				{
-					// actually started right now
-					m_waveFinished = false;
-					spawnWave();
-				}
-			}
-		}
-	}
-
-	void Level::spawnWave()
-	{
-		int totalEnemies = m_currentWave*m_currentWave;
-	}
-
-	void Level::enemyCheck()
-	{
-		if (m_entities.size() == 0)
-		{
-
 		}
 	}
 }

@@ -43,12 +43,6 @@ namespace Level
 		void handleCollision();
 
 	private:
-		void controlGame(float delta);
-		void waveStart(float delta);
-		void spawnWave();
-		void enemyCheck();
-
-	private:
 		Core::Game* game; // only for the resource manager and the statemanager
 		UI::UserInterface m_ui;
 
