@@ -12,7 +12,7 @@ Alien::Alien(Level::Level * level, const sf::Texture & texture)
 	m_grounded = false;
 
 	m_maxDamage = 10;
-	m_damageStepSize = 5.0f; // 5 seconds
+	m_damageStepSize = 3.5f; // 3.5 seconds
 	m_damageTimer = 0.0f;
 
 	theta = 180;
@@ -56,6 +56,7 @@ void Alien::handleCollision(Entity* o)
 	{
 		Bullet* b = dynamic_cast<Bullet*>(o);
 		takeDamage(b->getDamageAmount());
+		m_level->increaseScore(5);
 	}
 }
 

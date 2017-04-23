@@ -25,6 +25,9 @@ namespace UI
 
 		void setMessage(const std::string& message, float duration);
 		void hideMessage();
+		void setScore(const int& score);
+
+		void setGameOver(const int& waves, const int& score);
 
 	public:
 		/* BY PUTTING THESE CLASSES AS PUBLIC ACCESSABLE MEANS THAT I'M LAZY */
@@ -40,9 +43,15 @@ namespace UI
 		sf::Text m_playerHealth;
 		sf::Text m_houseHealth;
 		sf::Text m_message;
+		sf::Text m_scoreLabel;
 
 		bool m_messageVisible;
 		float m_messageDuration;
+
+		sf::Text m_title;
+		sf::Text m_gameOverText;
+		sf::Text m_start;
+		bool m_gameOver;
 	};
 }
 

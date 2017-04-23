@@ -2,7 +2,7 @@
 
 int main(int argc, const char* argv[])
 {
-	Core::Game g("LD38", 1280, 720);
+	Core::Game g("Tiny Safe World - LD38", 1280, 720);
 	g.run();
 
 	return 0;

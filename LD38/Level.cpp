@@ -17,39 +17,44 @@ namespace Level
 		m_waitAmount = 3.0f;
 		m_waitTimer = 0.0f;
 		m_pushedMessage = false;
+		m_gameOver = false;
 	}
 
 	void Level::handleEvents(sf::Event& event)
 	{
-		for (auto it = std::begin(m_entities); it != std::end(m_entities); ++it)
+		if (!m_gameOver)
 		{
-			(*it)->handleEvents(event);
+			for (auto it = std::begin(m_entities); it != std::end(m_entities); ++it)
+			{
+				(*it)->handleEvents(event);
+			}
+			if (m_player != nullptr) m_player.get()->handleEvents(event);
 		}
-		if (m_player != nullptr) m_player.get()->handleEvents(event);
 	}
 
 	void Level::update(float delta)
 	{
-		handleCollision();
-		// update bullets
-		for (auto it = std::begin(m_bullets); it != std::end(m_bullets); ++it)
+		if (!m_gameOver)
 		{
-			(*it)->update(delta);
+			handleCollision();
+			// update bullets
+			for (auto it = std::begin(m_bullets); it != std::end(m_bullets); ++it)
+			{
+				(*it)->update(delta);
+			}
+
+			// update entities
+			for (auto it = std::begin(m_entities); it != std::end(m_entities); ++it)
+			{
+				(*it)->update(delta);
+			}
+			if (m_player != nullptr) m_player.get()->update(delta);
+
+			gameController(delta);
+			removeDeadObjects();
 		}
-
-		// update entities
-		for (auto it = std::begin(m_entities); it != std::end(m_entities); ++it)
-		{
-			(*it)->update(delta);
-		}
-		if (m_player != nullptr) m_player.get()->update(delta);
-
-		gameController(delta);
-
 		// update ui
 		m_ui.update(delta);
-
-		removeDeadObjects();
 	}
 
 	void Level::render(sf::RenderWindow& window)
@@ -112,6 +117,13 @@ namespace Level
 		auto b = std::make_unique<Bullet>(this, game->resourceManager().textures["bullet"], direction);
 		b->setTheta(theta);
 		m_bullets.push_back(std::move(b));
+	}
+
+	void Level::increaseScore(int amount)
+	{
+		m_score += amount;
+		// not nice to use expensive string stuff here.
+		m_ui.setScore(m_score);
 	}
 
 	void Level::removeDeadObjects()
@@ -177,6 +189,13 @@ namespace Level
 						m_entities.push_back(std::move(enemy));
 					}
 				}
+			}
+
+			// check the house hp
+			if (m_house->getHealth() == 0)
+			{
+				m_gameOver = true;
+				m_ui.setGameOver(m_currentWave, m_score);
 			}
 		}
 	}

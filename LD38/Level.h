@@ -39,6 +39,8 @@ namespace Level
 		void createHouse(const float& theta);
 		void createBullet(const int& direction, const float& theta);
 
+		void increaseScore(int amount);
+		
 	private:
 		void removeDeadObjects();
 		void handleCollision();
@@ -60,6 +62,9 @@ namespace Level
 		float m_waitAmount;
 		float m_waitTimer;
 		bool m_pushedMessage;
+
+		bool m_gameOver;
+		int m_score;
 
 		Random<std::minstd_rand> r;
 	};
