@@ -51,12 +51,6 @@ namespace Level
 		std::unique_ptr<Player> m_player;
 		std::unique_ptr<House> m_house;
 		Planet m_planet;
-
-		int m_currentWave;
-		bool m_waveStarted;
-		bool m_waveFinished;
-		bool m_didFinishSpawning;
-		float m_waveTimer;
 	};
 }
 
