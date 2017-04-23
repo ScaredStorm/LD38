@@ -7,7 +7,7 @@ namespace Level
 		: m_planet(game->resourceManager().textures["planet"])
 	{
 		this->game = game;
-		m_player = std::make_unique<Player>(this, &m_planet, game->resourceManager().textures["player"]);
+		m_player = std::make_unique<Player>(this, game->resourceManager().textures["player"]);
 
 		m_planet.setPosition(sf::Vector2f{ game->width() / 2.0f, game->height() / 2.0f });
 	}
@@ -45,5 +45,10 @@ namespace Level
 	Player* Level::getPlayer()
 	{
 		return m_player.get();
+	}
+
+	Planet* Level::getPlanet()
+	{
+		return &m_planet;
 	}
 }

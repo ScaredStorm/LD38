@@ -14,7 +14,7 @@ namespace Level
 class Player : public Entity, public IDamageable<int>
 {
 public:
-	Player(Level::Level* level, Level::Planet* p, const sf::Texture& texture);
+	Player(Level::Level* level, const sf::Texture& texture);
 	~Player();
 
 	void handleEvents(sf::Event& event) override;
@@ -28,15 +28,10 @@ private:
 	void handleInput(float delta);
 	void handleGravity(float delta);
 	
-	float getDirectionToPlanet();
-	float getDistanceToPlanet();
 	float getHeightFromPlanet();
 	void rotate();
 
 private:
-	Level::Planet* m_planet;
-	Level::Level* m_level;
-
 	float m_movementSpeed;
 	float m_jumpHeight;
 	float m_gravitySpeed;

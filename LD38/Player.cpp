@@ -4,11 +4,9 @@
 #include <iostream>
 #include "Maths.h"
 
-Player::Player(Level::Level* level, Level::Planet* p, const sf::Texture& texture)
+Player::Player(Level::Level* level, const sf::Texture& texture)
+	: Entity(level)
 {
-	m_planet = p;
-	m_level = level;
-
 	m_sprite.setTexture(texture);
 	m_sprite.setOrigin(sf::Vector2f{ m_sprite.getGlobalBounds().width / 2, m_sprite.getGlobalBounds().height - 6 });
 	m_maxHealth = 100;
@@ -37,8 +35,8 @@ void Player::update(float delta)
 	handleGravity(delta);
 
 	/* calculate new positions */
-	float newX = m_planet->getPosition().x + cosf(to_radians(theta)) * (m_planet->getRadius() + height);
-	float newY = m_planet->getPosition().y + sinf(to_radians(theta)) * (m_planet->getRadius() + height);
+	float newX = m_level->getPlanet()->getPosition().x + cosf(to_radians(theta)) * (m_level->getPlanet()->getRadius() + height);
+	float newY = m_level->getPlanet()->getPosition().y + sinf(to_radians(theta)) * (m_level->getPlanet()->getRadius() + height);
 	setPosition({ newX, newY });
 	rotate();
 }
@@ -80,24 +78,10 @@ void Player::handleGravity(float delta)
 	m_grounded = (height > 0) ? false : true;
 }
 
-float Player::getDirectionToPlanet()
-{
-	float dx = m_position.x - m_planet->getPosition().x;
-	float dy = m_position.y - m_planet->getPosition().y;
-	return atan2f(dy, dx);
-}
-
-float Player::getDistanceToPlanet()
-{
-	float dx = m_position.x - m_planet->getPosition().x;
-	float dy = m_position.y - m_planet->getPosition().y;
-	return sqrtf(dx*dx + dy*dy);
-}
-
 float Player::getHeightFromPlanet()
 {
 	float distance = getDistanceToPlanet();
-	return distance - m_planet->getRadius();
+	return distance - m_level->getPlanet()->getRadius();
 }
 
 void Player::rotate()

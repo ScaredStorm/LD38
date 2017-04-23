@@ -28,6 +28,7 @@ namespace Level
 
 		Entity* getEntity(size_t id);
 		Player* getPlayer();
+		Planet* getPlanet();
 
 	private:
 		Core::Game* game; // only for the resource manager and the statemanager
