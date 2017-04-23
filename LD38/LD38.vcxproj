@@ -152,12 +152,19 @@
     <ClInclude Include="Planet.h" />
     <ClInclude Include="Player.h" />
     <ClInclude Include="Random.h" />
+    <ClInclude Include="resource.h" />
     <ClInclude Include="ResourceController.h" />
     <ClInclude Include="ResourceManager.h" />
     <ClInclude Include="SMenu.h" />
     <ClInclude Include="SPlaying.h" />
     <ClInclude Include="StateManager.h" />
     <ClInclude Include="UserInterface.h" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="LD38.rc" />
+  </ItemGroup>
+  <ItemGroup>
+    <Image Include="C:\Users\Sander\Pictures\Personal\Games\LD38\Icons\planet.ico" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

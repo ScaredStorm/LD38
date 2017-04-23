@@ -10,6 +10,12 @@ namespace Core
 	{
 		m_window.setFramerateLimit(60);
 		m_stateManager.push<State::SMenu>(this);
+
+		sf::Image icon;
+		if (icon.loadFromFile("Assets/Textures/icon.png"))
+		{
+			m_window.setIcon(32, 32, icon.getPixelsPtr());
+		}
 	}
 
 	Game::~Game()
