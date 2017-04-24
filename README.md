@@ -7,9 +7,12 @@ The game is programmed using c++ and the SFML library.
 
 ## Controls
 The game controls are very simple:
-* A & D - move the player left or right.
-* Left & Right - shoot left or right.
-* W - if you didn't place a house, place a house at your location.
+
+|Action      |Result                        |
+|:----------:|------------------------------|
+|A & D       |move the player left or right |
+|Lef & Right |shoot left or right           |
+|W           |place a house at your location|
 
 ## What could I do better
 There are a lot of things in this game that can be better, but the most important things that can be better:
